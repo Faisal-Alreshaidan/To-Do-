@@ -1,0 +1,21 @@
+/* dark-mode.css */
+:root {
+    --background-color: #121212;
+    --text-color: #ffffff;
+    --button-color: #3333ff;
+    --button-text-color: #ffffff;
+    /* Define other dark mode variables as needed */
+  }
+  
+  /* Apply the dark theme variables */
+  body.dark-mode {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  
+  button.dark-mode {
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+    /* Additional button styling for dark mode */
+  }
+  
