@@ -10,16 +10,14 @@ import { Button } from '../common/Button';
  *
  * @param {Object} props - The component props.
  * @param {string} props.id - The ID of the todo.
- * @param {Function} props.fetchData - The function to fetch todos.
- * @param {Function} props.handleUpdate - The function to update a todo.
- * @param {Function} props.handleDelete - The function to delete a todo.
+ * @param {Function} props.fetchData - The function to re-fetch todos.
  * @returns {JSX.Element} The rendered Todo component.
  */
-export function Todo({ id, fetchData, handleUpdate, handleDelete }) {
+export function Todo({ id, fetchData }) {
   const [todo, setTodo] = useState(null);
   const [isEdit, setIsEdit] = useState(false);
   const [tempTitle, setTempTitle] = useState('');
-  const [tempPriority, setTempPriority] = useState('medium'); // State to handle priority
+  const [tempPriority, setTempPriority] = useState('medium'); // Initial state for priority
 
   // Initial fetch
   useEffect(() => {
@@ -29,7 +27,7 @@ export function Todo({ id, fetchData, handleUpdate, handleDelete }) {
         const jsonResponse = await response.json();
         setTodo(jsonResponse);
         setTempTitle(jsonResponse.title);
-        setTempPriority(jsonResponse.priority || 'medium'); // Default to 'medium' if priority is not set
+        setTempPriority(jsonResponse.priority || 'medium'); // Set to existing priority or default to 'medium'
       } catch (error) {
         console.error('Error fetching todo:', error);
       }
@@ -37,39 +35,61 @@ export function Todo({ id, fetchData, handleUpdate, handleDelete }) {
     fetchDataAsync();
   }, [id]);
 
-  // Update temporary states when todo updates
+  // Update temp values when todo is updated
   useEffect(() => {
     if (todo) {
       setTempTitle(todo.title);
       setTempPriority(todo.priority);
     }
   }, [todo]);
-
   /**
    * Handles the change event of the input element.
    * @param {Object} e - The event object.
    */
   const handleInputChange = (e) => {
-    setTempTitle(e.target.value);
-  };
-
-  /**
-   * Handles the priority change event.
-   * @param {Object} e - The event object.
-   */
-  const handlePriorityChange = (e) => {
-    setTempPriority(e.target.value);
-  };
+    setTempTitle(e.target.value)
+  }
 
   /**
    * Handles the edit functionality.
    */
   async function handleEditClick() {
-    if (isEdit) {
-      await handleUpdate(id, { title: tempTitle, priority: tempPriority });
-      fetchData(); // Assuming fetchData will re-fetch the updated todos
+    if(isEdit) {
+      await handleUpdate({ title: tempTitle })
     }
-    setIsEdit(!isEdit);
+    setIsEdit(isEdit => !isEdit)
+  }
+
+  /**
+   * Handles the delete action for a todo item.
+   */
+  async function handleDelete() {
+    try {
+      await fetch(`http://localhost:3000/${id}`, {
+      method: "DELETE",
+    })
+    await fetchData() // refetch data as the todo item is deleted
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  /**
+   * Updates the todo item with the provided data.
+   * @param {object} updatedTodo - The updated todo object.
+   * @returns {Promise<void>} - A promise that resolves when the update is complete.
+   */
+  async function handleUpdate(updatedTodo) {
+    try {
+      await fetch(`http://localhost:3000/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedTodo),
+      });
+      setTodo({ ...todo, ...updatedTodo });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -79,28 +99,26 @@ export function Todo({ id, fetchData, handleUpdate, handleDelete }) {
         {isEdit ? (
           <>
             <TodoInput value={tempTitle} onChange={handleInputChange} />
-            <select value={tempPriority} onChange={handlePriorityChange}>
+            {/* Priority selection dropdown */}
+            <select value={tempPriority} onChange={(e) => setTempPriority(e.target.value)}>
               <option value="high">High</option>
               <option value="medium">Medium</option>
               <option value="low">Low</option>
             </select>
           </>
         ) : (
-          <TodoTitle title={todo?.title} />
+          <>
+            <TodoTitle title={todo?.title} />
+            {/* Display priority when not editing */}
+            <span className={`priority ${tempPriority}`}>Priority: {tempPriority}</span>
+          </>
         )}
       </div>
       <div className='todo__buttons'>
-        <Button 
-          className={isEdit ? 'btn-success' : 'btn-info'}
-          onClick={handleEditClick}
-        >
+        <Button className={isEdit ? 'btn-success' : 'btn-info'} onClick={handleEditClick}>
           {isEdit ? 'Save' : 'Edit'}
         </Button>
-        <Button 
-          className='btn-danger'
-          onClick={() => handleDelete(id)} 
-          disabled={isEdit}
-        >
+        <Button className='btn-danger' onClick={handleDelete} disabled={isEdit}>
           Delete
         </Button>
       </div>
