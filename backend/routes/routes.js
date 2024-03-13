@@ -3,6 +3,13 @@ import { Todo } from '../models/todos.js';
 
 const router = express.Router();
 
+// Define a map for priority levels
+const priorityMap = {
+  "high": 3,
+  "medium": 2,
+  "low": 1
+};
+
 // POST route to create a new todo item
 router.post('/', async (req, res) => {
   try {
@@ -14,10 +21,12 @@ router.post('/', async (req, res) => {
   }
 });
 
-// GET route to retrieve all todo items
+// GET route to retrieve all todo items sorted by priority in descending order
 router.get('/', async (req, res) => {
   try {
-    const todos = await Todo.find().sort({ priority: 1, createdAt: -1 }); // Sort by priority ascending and createdAt descending
+    const todos = await Todo.find().lean(); // Fetch todos
+    // Sort the todos based on priority levels
+    todos.sort((a, b) => priorityMap[b.priority] - priorityMap[a.priority]);
     res.json(todos);
   } catch (error) {
     res.status(500).json({ error: error.message });
