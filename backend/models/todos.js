@@ -10,6 +10,10 @@ let TodoSchema = new mongoose.Schema({
     required: true,
     default: false
   },
+  priority: {
+    type: String,
+    default: "medium"
+  }
 }, {
   timestamps: true // Saves createdAt and updatedAt as dates. createdAt will be our timestamp.
 })
