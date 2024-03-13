@@ -16,7 +16,6 @@
   --danger-color-light: rgb(213, 41, 41, 0.6);
 }
 
-
 html, body, #root {
   box-sizing: border-box;
   width: 100%;
@@ -133,93 +132,18 @@ body {
   font-size: .75em;
 }
 
-/* INPUTS */
-input[type='text'] {
-  border: none;
-  outline: none;
-  padding: 0.5em;
-  border-radius: .25em;
-  border: 1px solid #eee;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-input[type='text']:focus {
-  border: 1px solid #aaa;
-}
-input[type='text']::placeholder {
-  color: #aaa;
-}
-
-/* BUTTONS */
-button {
-  outline: none;
-  padding: 0.5em;
-  border-radius: .25em;
-  border: 2px solid white;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-}
-button:hover {
-  border: 2px solid var(--primary-color);
-}
-
-.btn-primary {
-  background-color: var(--primary-color);
-  color: white;
-}
-.btn-primary:disabled {
-  background-color: var(--primary-color-light);
-}
-.btn-primary:disabled:hover {
-  border: 2px solid white;
-}
-.btn-secondary {
-  background-color: var(--secondary-color);
-  color: white;
-}
-.btn-secondary:disabled {
-  background-color: var(--secondary-color-light);
-}
-.btn-secondary:disabled:hover {
-  border: 2px solid white;
-}
-.btn-info {
+/* PRIORITY */
+.priority {
+  font-size: 0.9em;
+  padding: 0.25em 0.5em;
+  border-radius: 0.25em;
+  margin-left: 0.5em; /* Adjust as needed */
   background-color: var(--info-color);
   color: white;
 }
-.btn-info:disabled {
-  background-color: var(--info-color-light);
+.priority.high {
+  background-color: var(--danger-color); /* Change color based on priority level */
 }
-.btn-info:disabled:hover {
-  border: 2px solid white;
-}
-.btn-success {
-  background-color: var(--success-color);
-  color: white;
-}
-.btn-success:disabled {
-  background-color: var(--success-color-light);
-}
-.btn-success:disabled:hover {
-  border: 2px solid white;
-}
-.btn-warning {
-  background-color: var(--warning-color);
-  color: white;
-}
-.btn-warning:disabled {
-  background-color: var(--warning-color-light);
-}
-.btn-warning:disabled:hover {
-  border: 2px solid white;
-}
-.btn-danger {
-  background-color: var(--danger-color);
-  color: white;
-}
-.btn-danger:disabled {
-  background-color: var(--danger-color-light);
-  cursor: inherit;
-}
-.btn-danger:disabled:hover {
-  border: 2px solid white;
+.priority.medium {
+  background-color: var(--warning-color); /* Change color based on priority level */
 }
