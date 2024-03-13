@@ -131,6 +131,9 @@ body {
 .todo .todo__buttons button {
   font-size: .75em;
 }
+.todo.completed {
+  opacity: 0.6; /* Change the opacity to gray out the todo item */
+}
 
 /* PRIORITY */
 .priority {
@@ -147,3 +150,4 @@ body {
 .priority.medium {
   background-color: var(--warning-color); /* Change color based on priority level */
 }
+
