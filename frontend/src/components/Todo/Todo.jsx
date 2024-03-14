@@ -1,25 +1,23 @@
+// Todo.js
 import React, { useEffect, useState } from 'react';
 import { TodoInput } from './TodoInput';
 import { TodoTitle } from './TodoTitle';
 import { TodoCheckbox } from './TodoCheckbox';
 import { Button } from '../common/Button';
 import { TodoCrossOff } from './TodoCrossOff';
-import { TodoPriority } from './TodoPriority'; // Import TodoPriority component
+import { TodoPriority } from './TodoPriority';
+import TranslateComponent, { translateText } from './TranslateComponent';
 
-/**
- * Renders a Todo component.
- *
- * @param {Object} props - The component props.
- * @param {string} props.id - The ID of the todo.
- * @param {Function} props.fetchData - The function to re-fetch todos.
- * @returns {JSX.Element} The rendered Todo component.
- */
 export function Todo({ id, fetchData }) {
   const [todo, setTodo] = useState(null);
   const [isEdit, setIsEdit] = useState(false);
   const [tempTitle, setTempTitle] = useState('');
+  const [originalTitle, setOriginalTitle] = useState('');
   const [completed, setCompleted] = useState(false);
   const [tempPriority, setTempPriority] = useState('medium');
+  const [clickCount, setClickCount] = useState(0); // State to keep track of click count
+
+  const apiKey = 'AIzaSyDcx1kw-fiozm6FNaBpnlwrQJy8-J9aEio';
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +26,7 @@ export function Todo({ id, fetchData }) {
         const jsonResponse = await response.json();
         setTodo(jsonResponse);
         setTempTitle(jsonResponse.title);
+        setOriginalTitle(jsonResponse.title);
         setTempPriority(jsonResponse.priority || 'medium');
         setCompleted(jsonResponse.isCompleted || false);
       } catch (error) {
@@ -53,7 +52,7 @@ export function Todo({ id, fetchData }) {
       await fetch(`http://localhost:3000/${id}`, {
         method: 'DELETE',
       });
-      await fetchData();
+      fetchData();
     } catch (error) {
       console.log(error);
     }
@@ -63,7 +62,9 @@ export function Todo({ id, fetchData }) {
     try {
       await fetch(`http://localhost:3000/${id}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(updatedTodo),
       });
       setTodo({ ...todo, ...updatedTodo });
@@ -72,11 +73,19 @@ export function Todo({ id, fetchData }) {
     }
   }
 
+  const handleTranslationClick = async () => {
+    const targetLanguage = clickCount % 2 === 0 ? 'ar' : 'en'; // Arabic on odd clicks, English on even clicks
+    const updatedTitle = originalTitle === tempTitle ? tempTitle : originalTitle;
+    const translatedText = await translateText(updatedTitle, targetLanguage, apiKey);
+    setTempTitle(translatedText);
+    setClickCount(clickCount + 1); // Increment click count
+  };
+
   return (
     <div className={`todo ${completed ? 'completed' : ''}`}>
       <div className='todo__items'>
         <TodoCheckbox
-          isCompleted={todo?.isCompleted}
+          isCompleted={completed}
           handleUpdate={(value) => {
             setCompleted(value);
             handleUpdate({ ...todo, isCompleted: value });
@@ -86,9 +95,15 @@ export function Todo({ id, fetchData }) {
           <TodoInput title={tempTitle} handleInputChange={handleInputChange} />
         ) : (
           <>
-            <TodoTitle title={todo?.title} />
+            <TodoTitle title={tempTitle} />
             {completed && <TodoCrossOff />}
-            <TodoPriority priority={tempPriority} /> {/* Render TodoPriority */}
+            <TodoPriority priority={tempPriority} />
+            {!isEdit && (
+              <TranslateComponent
+                setOriginalText={handleTranslationClick}
+                apiKey={apiKey}
+              />
+            )}
           </>
         )}
       </div>
