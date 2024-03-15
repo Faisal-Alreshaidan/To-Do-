@@ -1,0 +1,126 @@
+html {
+  background: rgb(142, 36, 170);
+}
+
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  /* background: linear-gradient(to bottom right, #731e09, #d66b19, #8d0e7c); */
+  background-color: #444;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.app-container {
+    display: flex;
+    justify-content: space-between; /* This will place children elements on opposite ends */
+    align-items: flex-start; /* This will align children elements to the top */
+    padding: f0px 20px; /* Add some padding to the sides of the container */
+    height: 100vsh; /* Use the full height of the viewport */
+
+  }   
+  
+  .todos-container {
+    flex: 3; /* This allows the to-do list to grow and take up available space */
+    margin-right: 30px; /* Add some space between the to-do list and the weather widget */
+  }
+  
+  .weather-container {
+    flex-grow: 0; /* This prevents the weather widget from growing */
+    flex-basis: 300px; /* This sets a base width for the weather widget */
+  }
+  
+  /* Add your existing styles for .todos and .weather-card here */
+  
+
+  .todos-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #731e09, #d66b19, #8d0e7c); /* Example gradient with multiple colors */
+    color: rgb(229, 221, 210);
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  
+  }
+
+  .todos-container h1 {
+    font-size: 24px; /* Increase the font size for a more prominent heading */
+    margin-bottom: 10px; /* Add some space below the heading */
+    text-transform: uppercase; /* Convert the text to uppercase for emphasis */
+    color: #fff; /* Set the text color to white */
+  }
+
+
+  
+
+.todo-item {
+  background-color: #444; /* Slightly lighter than the container background for contrast */
+  color: white; /* Text color */  
+  padding: 10px;
+  border-radius: 5px; /* Rounded corners */
+  margin: 10px 0; /* Space above and below each item */
+  width: 100%; /* Full width of the container */
+  max-width: 500px; /* Maximum width of the todo item */
+  display: flex;
+  justify-content: space-between; /* Space out the content and buttons */
+  align-items: center;
+}
+
+button {
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  transform: translateY(-2px); /* Slight raise effect */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+
+
+.todo-list-item {
+  background: #fff; /* Light background for the tasks */
+  color: #333; /* Darker text for better readability */
+  margin-bottom: 10px; /* Space between tasks */
+  padding: 10px 15px; /* Padding inside the tasks */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  display: flex;
+  align-items: center; /* Center items vertically */
+  justify-content: space-between; /* Space out the content and buttons */
+  transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+.todo-list-item:hover {
+  background: #eaeaea; /* Slightly darker background on hover */
+}
+
+.todo-list-item label {
+  font-weight: bold; /* Make the text bold */
+}
+
+.todo-list-item button {
+  background: #3498db; /* Consistent button color */
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer; /* Pointer cursor for buttons */
+  transition: background-color 0.3s ease; /* Transition for hover effect */
+}
+
+.todo-list-item button:hover {
+  background: #2980b9; /* Darker button background on hover */
+}
+
+.todo-list-item button.delete-button {
+  background: #e74c3c; /* Red background for delete button */
+}
+
+.todo-list-item button.delete-button:hover {
+  background: #c0392b; /* Darker red on hover */
+}

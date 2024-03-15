@@ -1,0 +1,71 @@
+.weather-card {
+    background-color: #921ebc; /* gold color */
+    border-radius: 20px;
+    padding: 20px;
+    color: white;
+    width: 200px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+  
+  .date-time {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+    gap: 8px;
+
+  }
+  
+  .temperature {
+    font-size: 3em;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  
+  .city {
+    font-size: 1.5em;
+  }
+  
+  .weather-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1em;
+  }
+  
+  .weather-info > div {
+    margin: 2px 0;
+  }
+  
+  .fetch-button {
+    padding: 5px 15px; /* Add some padding */
+    background-color: #3498db; /* A nice shade of blue */
+    color: white; /* White text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+    font-size: 0.8rem; /* Adjust font size as needed */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    margin-bottom: 10px; /* Add some space below the button */
+    width: auto; /* Adjust width as needed */
+  }
+  
+  .fetch-button:hover {
+    background-color: #2980b9; /* Darken button color on hover for visual feedback */
+  }
+  
+  /* Add some spacing and style to the input field as well */
+  .city-input {
+    padding: 10px;
+    margin-right: 10px; /* Add space between the input field and the button */
+    border: 1px solid #ccc; /* Add a border to the input */
+    border-radius: 5px; /* Match the border radius with the button */
+    margin-bottom: 10px; /* Add some space below the input */
+    width: calc(100% - 20px); /* Subtract padding from width */
+    box-sizing: border-box;
+  }
+  

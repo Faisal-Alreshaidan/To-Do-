@@ -1,4 +1,4 @@
-// Todo.js
+
 import React, { useEffect, useState } from 'react';
 import { TodoInput } from './TodoInput';
 import { TodoTitle } from './TodoTitle';
@@ -7,6 +7,7 @@ import { Button } from '../common/Button';
 import { TodoCrossOff } from './TodoCrossOff';
 import { TodoPriority } from './TodoPriority';
 import TranslateComponent, { translateText } from './TranslateComponent';
+import './TodoPriority.css';
 
 export function Todo({ id, fetchData }) {
   const [todo, setTodo] = useState(null);

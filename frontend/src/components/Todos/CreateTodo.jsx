@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Button } from '../common/Button';
+import './CreateTodo.css';
 
 /**
  * Component for creating a new todo.
@@ -45,21 +46,27 @@ export function CreateTodo({ handleCreate }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="create-todo-form">
       <input
         type="text"
+        className="todo-input"
         value={title}
         onChange={handleInputChange}
         placeholder="Enter a new todo"
       />
       {/* Priority dropdown */}
-      <select value={priority} onChange={handlePriorityChange}>
-        <option value="high">High</option>
-        <option value="medium">Medium</option>
-        <option value="low">Low</option>
-      </select>
-      <Button type="submit">Add Todo</Button>
+      <div className="priority-select-container">
+        <select
+          className="priority-select"
+          value={priority}
+          onChange={handlePriorityChange}
+        >
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+      </div>
+      <Button type="submit" className="add-todo-button">Add Todo</Button>
     </form>
   );
 }
-

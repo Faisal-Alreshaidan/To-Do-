@@ -135,19 +135,3 @@ body {
   opacity: 0.6; /* Change the opacity to gray out the todo item */
 }
 
-/* PRIORITY */
-.priority {
-  font-size: 0.9em;
-  padding: 0.25em 0.5em;
-  border-radius: 0.25em;
-  margin-left: 0.5em; /* Adjust as needed */
-  background-color: var(--info-color);
-  color: white;
-}
-.priority.high {
-  background-color: var(--danger-color); /* Change color based on priority level */
-}
-.priority.medium {
-  background-color: var(--warning-color); /* Change color based on priority level */
-}
-

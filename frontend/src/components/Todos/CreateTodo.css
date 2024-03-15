@@ -1,0 +1,63 @@
+
+form {
+    display: flex; /* Use flexbox for alignment */
+    gap: 0.5rem; /* Space between form elements */
+    margin-bottom: 1rem; /* Space below the form */
+  }
+  
+  form input {
+    flex-grow: 1; /* Input field takes up the available space */
+    font-size: 1.2rem; /* Larger font size for better readability */
+    padding: 10px; /* More padding for a larger input field */
+    border: 2px solid #ccc; /* Adds a border to the input */
+    border-radius: 20px; /* Rounded corners */
+    background-color: rgb(54, 44, 44);
+  }
+
+  form input:focus {
+    outline: none; /* Remove the default focus outline */
+    border-color: #e7dfda; /* Change the border color on focus */
+    border-radius: 20px;
+  }
+
+  form input p1{
+    color: #2f1608; /* Light gray placeholder text */
+  }
+
+  form input::placeholder {
+    color: #f0ebe8; /* Light gray placeholder text */
+  }
+
+  form button {
+    padding: 10px 20px; /* Optional: Adjust button padding to match input height */
+    font-size: 1.2rem; /* Optional: Match button font size to input field */
+    border-radius: 4px; /* Optional: Match button border radius to input field */
+  }
+  
+  form button:hover {
+    background-color: #d66b19; /* Optional: Change button color on hover */
+    color: white; /* Optional: Change text color on hover */
+  }
+
+
+.priority-select-container {
+  position: relative;
+}
+
+.priority-select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  appearance: none; /* Removes default styling */
+  background-color: #fff;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1.0rem;
+  height: 50px;
+
+}
+
+.priority-select-container::after {
+  background-color: #d66b19;
+  
+}
