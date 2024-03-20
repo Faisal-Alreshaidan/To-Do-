@@ -3,7 +3,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 
 
-import { corsOptions } from './config/corsOptions.js'
+
 import routes from './routes/routes.js'
 
 // Constants
@@ -15,7 +15,7 @@ const DB_CONNECT = process.env.DB_CONNECT || 'mongodb://localhost:27017/cs333'
 const app = express()
 
 // Middleware
-app.use(cors(corsOptions))
+
 app.use(express.json())
 
 // Initialize DB
