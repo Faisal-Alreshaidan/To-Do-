@@ -28,7 +28,6 @@ To run this project locally:
 
 - **Components:** The `Weather` folder contains both `Weather.jsx` and `Weather.css` for the weather feature's frontend implementation.
 
-- 
 
 ### UI Enhancements
 - **General:** The `App.css` file was added to improve the overall aesthetics of the application.
