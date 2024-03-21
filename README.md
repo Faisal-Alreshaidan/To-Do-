@@ -24,8 +24,11 @@ To run this project locally:
 - **Components:** The `TranslateComponent.jsx` was added for handling translations, with added functionality in `Todo.jsx` to manage translation triggers.
 
 ### Weather Updates
-- **Description:** A weather API integration provides real-time weather updates within the application.
+- **Description:** A weather API integration that provides real-time weather updates within the application. Now with Geolocation support, the application can automatically fetch weather updates based on the user's current location.
+
 - **Components:** The `Weather` folder contains both `Weather.jsx` and `Weather.css` for the weather feature's frontend implementation.
+
+- 
 
 ### UI Enhancements
 - **General:** The `App.css` file was added to improve the overall aesthetics of the application.
